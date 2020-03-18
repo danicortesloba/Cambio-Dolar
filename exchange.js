@@ -10,8 +10,6 @@ function getCurrency() {
     	var currentDolar = response.dolar.valor;
       if(currentDolar != pastDolar){
         console.log(currentDolar, date)
-      } else {
-        console.log('No change!')
       }
       pastDolar = currentDolar;
   })
@@ -19,4 +17,4 @@ function getCurrency() {
 
 }
 
-setInterval(getCurrency, 600)
+setInterval(getCurrency, 60000)
