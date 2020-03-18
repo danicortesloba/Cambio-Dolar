@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 var currentDolar;
-var parsed;
 function getCurrency() {
   fetch('https://mindicador.cl/api')
   .then(response => response.json())
@@ -11,8 +10,8 @@ function getCurrency() {
 }
 
 function parseResponse(response){
-  parsed = JSON.parse(response);
-  console.log(parsed);
+  var parsed = JSON.parse(response);
+  console.log(parsed.count);
 }
 
 //function getDivisaByCode(codigo, response) {
