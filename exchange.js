@@ -1,15 +1,17 @@
 const fetch = require('node-fetch');
 
-
+var pastDolar;
 function getCurrency() {
   fetch('https://mindicador.cl/api')
   .then(response => response.json())
   .then(response => {
-      var pastDolar;
+
       var date = response.dolar.fecha;
     	var currentDolar = response.dolar.valor;
       if(currentDolar != pastDolar){
-        console.log(currentDolar, date )
+        console.log(currentDolar, date)
+      } else {
+        console.log('No change!')
       }
       pastDolar = currentDolar;
   })
@@ -17,4 +19,4 @@ function getCurrency() {
 
 }
 
-setInterval(getCurrency, 60000)
+setInterval(getCurrency, 600)
