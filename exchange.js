@@ -14,10 +14,7 @@ function getCurrency() {
       pastDolar = currentDolar;
   })
   .catch(err => "ERROR");
+
 }
 
-
-
-
-
-getCurrency();
+setInterval(getCurrency, 60000)
