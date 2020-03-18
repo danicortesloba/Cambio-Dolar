@@ -1,0 +1,18 @@
+{
+  "name": "dolar-exchange",
+  "version": "1.0.0",
+  "description": "Dolar exchange with dates",
+  "main": "exchange.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dolar",
+    "exchange"
+  ],
+  "author": "Chana",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
