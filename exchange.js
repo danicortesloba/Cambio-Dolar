@@ -6,12 +6,15 @@ function getCurrency() {
   .then(response => response.json())
   .then(response => {
 
-      var date = response.dolar.fecha;
-    	var currentDolar = response.dolar.valor;
+      const date = response.dolar.fecha;
+    	const currentDolar = response.dolar.valor;
       if(currentDolar != pastDolar){
         console.log(currentDolar, date)
+        pastDolar = currentDolar;
+      }else {
+        console.log('nochange')
       }
-      pastDolar = currentDolar;
+
   })
   .catch(err => "ERROR");
 
