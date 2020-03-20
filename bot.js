@@ -1,7 +1,7 @@
-var request = require(./config.js);
+const { token } = require('./config');
 
 var TelegramBot = require('node-telegram-bot-api'),
-telegram = new TelegramBot(request.token, { polling: true });
+telegram = new TelegramBot(token, { polling: true });
 
 const fetch = require('node-fetch');
 var currentDolar;
