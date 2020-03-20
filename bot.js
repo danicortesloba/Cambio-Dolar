@@ -1,28 +1,18 @@
 const { token } = require('./config');
+const  currentDolar = require('./exchange');
 
-var TelegramBot = require('node-telegram-bot-api'),
-telegram = new TelegramBot(token, { polling: true });
+const TeleBot = require('telebot');
+ const telegram = new TeleBot(token)
 
 const fetch = require('node-fetch');
-var currentDolar;
-var date;
+
 
 telegram.on("text", (message) => {
   if(message.text.toLowerCase() == "dolar") {
   getCurrency();
   telegram.sendMessage(message.chat.id, currentDolar);
-}else {telegram.sendMessage(message.chat.id, "Pídeme el dolar");}
+} else {telegram.sendMessage(message.chat.id, "Pídeme el dolar");}
 });
 
-  function getCurrency() {
-    fetch('https://mindicador.cl/api')
-    .then(response => response.json())
-    .then(response => {
-        date = response.dolar.fecha;
-      	currentDolar = response.dolar.valor;
-    })
-    .catch(err => "ERROR");
 
-  }
-
-  getCurrency();
+  telegram.start();
