@@ -13,6 +13,7 @@
   "author": "Chana",
   "license": "UNLICENSED",
   "dependencies": {
+    "mongoose": "^5.9.5",
     "node-fetch": "^2.6.0",
     "telebot": "^1.3.0"
   }
