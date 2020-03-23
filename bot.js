@@ -5,9 +5,10 @@ const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
 
 const fetch = require('node-fetch');
+const command = /\/get_dolar/;
 
-telegram.on("text", (message) => {
-    if (message.text.toLowerCase() == "dolar") {
+telegram.on(command, (message) => {
+    if (command) {
         telegram.sendMessage(message.chat.id, getCurrentDolar());
     } else {
         telegram.sendMessage(message.chat.id, "Pídeme el dolar");
