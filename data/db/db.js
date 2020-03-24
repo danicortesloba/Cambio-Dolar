@@ -12,10 +12,10 @@ const userSchema = new mongoose.Schema({
   id: Number,
   is_bot: Boolean,
   first_name: String,
-  language_code: String
+  language_code: String,
+  subscription: { type: Boolean, default: true }
 });
 
 const User = mongoose.model('User', userSchema);
 
-const chano = new User({ id:1234, is_bot: false, first_name: 'Chano', language_code: 'es'});
-console.log(chano.is_bot);
+module.exports = User;

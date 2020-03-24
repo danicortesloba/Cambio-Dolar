@@ -1,5 +1,8 @@
 const { token } = require('./config');
 const { getCurrentDolar } = require('./exchange');
+const  { User }  = require('./data/db/db');
+
+
 
 const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
@@ -10,6 +13,7 @@ const subscribe = /\/subscribe/;
 const unsubscribe = /\/unsubscribe/;
 const subscription_status = /\/subscription_status/;
 
+
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
         telegram.sendMessage(message.chat.id, getCurrentDolar());
@@ -18,7 +22,7 @@ telegram.on(get_dolar, (message) => {
 
 telegram.on(subscribe, (message) => {
     if (subscribe){
-        telegram.sendMessage(message.chat.id, "You are subscribed!");
+      telegram.sendMessage(message.chat.id, "You are subscribed!");
     }
 });
 
