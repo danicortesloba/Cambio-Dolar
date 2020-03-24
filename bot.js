@@ -5,14 +5,32 @@ const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
 
 const fetch = require('node-fetch');
-const command = /\/get_dolar/;
+const get_dolar = /\/get_dolar/;
+const subscribe = /\/subscribe/;
+const unsubscribe = /\/unsubscribe/;
+const subscription_status = /\/subscription_status/;
 
-telegram.on(command, (message) => {
-    if (command) {
+telegram.on(get_dolar, (message) => {
+    if (get_dolar) {
         telegram.sendMessage(message.chat.id, getCurrentDolar());
-        console.log(message);
-    } else {
-        telegram.sendMessage(message.chat.id, "Pídeme el dolar");
+    }
+});
+
+telegram.on(subscribe, (message) => {
+    if (subscribe){
+        telegram.sendMessage(message.chat.id, "You are subscribed!");
+    }
+});
+
+telegram.on(unsubscribe, (message) => {
+    if (unsubscribe){
+        telegram.sendMessage(message.chat.id, "You are unsubscribed!");
+    }
+});
+
+telegram.on(subscription_status, (message) => {
+    if (subscription_status){
+        telegram.sendMessage(message.chat.id, "You are checking your status!");
     }
 });
 
