@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   is_bot: Boolean,
   first_name: String,
   language_code: String,
-  subscription: { type: Boolean, default: true }
+  subscription: Boolean
 });
 
 const User = mongoose.model('User', userSchema);
