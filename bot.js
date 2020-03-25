@@ -24,14 +24,18 @@ telegram.on(subscribe, (message) => {
     if (subscribe){
       let testUser = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
       testUser.save();
-        telegram.sendMessage(message.chat.id, "You are subscribed");
+      telegram.sendMessage(message.chat.id, "You are unsubscribed!");
     }
 });
 
+
+
+
 telegram.on(unsubscribe, (message) => {
     if (unsubscribe){
-        telegram.sendMessage(message.chat.id, "You are unsubscribed!");
-    }
+      const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
+      users = User.find({ id: message.from.id }, callback);
+      telegram.sendMessage(message.chat.id, "You are unsubscribed!")    }
 });
 
 telegram.on(subscription_status, (message) => {
