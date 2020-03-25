@@ -13,9 +13,15 @@ const unsubscribe = /\/unsubscribe/;
 const subscription_status = /\/subscription_status/;
 
 
-async function updateSubscription(message){
+async function updateSubscriptionFalse(message){
   const filter = { id: message.from.id };
   const update = { subscription: false };
+  let doc = await User.findOneAndUpdate(filter, update);
+}
+
+async function updateSubscriptionTrue(message){
+  const filter = { id: message.from.id };
+  const update = { subscription: true };
   let doc = await User.findOneAndUpdate(filter, update);
 }
 
@@ -27,16 +33,25 @@ telegram.on(get_dolar, (message) => {
 
 telegram.on(subscribe, (message) => {
     if (subscribe){
-      let testUser = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
-      testUser.save();
-      telegram.sendMessage(message.chat.id, "You are subscribed!");
+      User.count({id: message.from.id}, function (err, count){
+          if(count>0){
+            updateSubscriptionTrue(message);
+          } else {
+            let user = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
+            user.save();
+            telegram.sendMessage(message.chat.id, "You are subscribed!");
+          }
+      });
+
     }
 });
 
 
+
+
 telegram.on(unsubscribe, (message) => {
     if (unsubscribe){
-      updateSubscription(message);
+      updateSubscriptionFalse(message);
       telegram.sendMessage(message.chat.id, "You are unsubscribed!")    }
 });
 
@@ -44,6 +59,7 @@ telegram.on(subscription_status, (message) => {
     if (subscription_status){
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
       const user = User.find({ id: message.from.id }, callback);
+
       if(user.subscription == true){
         telegram.sendMessage(message.chat.id, "You are subscribed");
       } else {
