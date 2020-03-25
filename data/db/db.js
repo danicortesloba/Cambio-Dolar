@@ -1,4 +1,4 @@
-const { conection_string } = require('./config');
+const { conection_string } = require("../../config");
 const mongoose = require('mongoose');
 mongoose.connect(conection_string, {useNewUrlParser: true});
 
