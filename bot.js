@@ -43,8 +43,12 @@ telegram.on(unsubscribe, (message) => {
 telegram.on(subscription_status, (message) => {
     if (subscription_status){
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
-      users = User.find({ id: message.from.id }, callback);
-        telegram.sendMessage(message.chat.id, "You are checking your status!");
+      const user = User.find({ id: message.from.id }, callback);
+      if(user.subscription == true){
+        telegram.sendMessage(message.chat.id, "You are subscribed");
+      } else {
+        telegram.sendMessage(message.chat.id, "You are not subscribed");
+      }
     }
 });
 
