@@ -23,6 +23,8 @@ async function updateSubscriptionTrue(message){
   const filter = { id: message.from.id };
   const update = { subscription: true };
   let doc = await User.findOneAndUpdate(filter, update);
+  telegram.sendMessage(message.chat.id, "You are subscribed!");
+
 }
 
 function giveSubscriptionStatus(user, message){
@@ -49,8 +51,9 @@ telegram.on(subscribe, (message) => {
           } else {
             let user = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
             user.save();
+            telegram.sendMessage(message.chat.id, "You are subscribed!");
+
           }
-          telegram.sendMessage(message.chat.id, "You are subscribed!");
 
       });
 
