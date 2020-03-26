@@ -28,11 +28,13 @@ async function updateSubscriptionTrue(message){
 }
 
 function giveSubscriptionStatus(user, message){
-  if(user.subscription){
-  telegram.sendMessage(message.chat.id, "You are subscribed");
-  } else {
-  telegram.sendMessage(message.chat.id, "You are not subscribed");
-  }
+
+  console.log(user.subscription);
+  //if(user.subscription){
+  //telegram.sendMessage(message.chat.id, "You are subscribed");
+  //} else {
+  //telegram.sendMessage(message.chat.id, "You are not subscribed");
+  //}
 }
 
 telegram.on(get_dolar, (message) => {
