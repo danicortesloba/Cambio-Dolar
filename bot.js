@@ -25,6 +25,14 @@ async function updateSubscriptionTrue(message){
   let doc = await User.findOneAndUpdate(filter, update);
 }
 
+function giveSubscriptionStatus(user, message){
+  if(user.subscription){
+  telegram.sendMessage(message.chat.id, "You are subscribed");
+  } else {
+  telegram.sendMessage(message.chat.id, "You are not subscribed");
+  }
+}
+
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
@@ -57,13 +65,10 @@ telegram.on(subscription_status, (message) => {
     if (subscription_status){
 
       User.find({id: message.from.id}, function (err, user) {
-        if(err){
-          return console.log(err);
-        } 
-          if(user.subscription){
-          telegram.sendMessage(message.chat.id, "You are subscribed");
+          if(err){
+            return console.log(err);
           } else {
-          telegram.sendMessage(message.chat.id, "You are not subscribed");
+            giveSubscriptionStatus(user, message);
           }
 
       });
