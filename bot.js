@@ -36,20 +36,22 @@ function giveSubscriptionStatus(user, message){
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
-       telegram.sendMessage(message.chat.id, getCurrentDolar());
+      telegram.sendMessage(message.chat.id, getCurrentDolar());
    }
 });
 
+
 telegram.on(subscribe, (message) => {
-    if (subscribe){
+    if (subscribe && message.chat.type == "private"){
       User.count({id: message.from.id}, function (err, count){
           if(count>0){
             updateSubscriptionTrue(message);
           } else {
             let user = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
             user.save();
-            telegram.sendMessage(message.chat.id, "You are subscribed!");
           }
+          telegram.sendMessage(message.chat.id, "You are subscribed!");
+
       });
 
     }
