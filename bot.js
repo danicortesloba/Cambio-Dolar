@@ -59,12 +59,13 @@ telegram.on(subscription_status, (message) => {
       User.find({id: message.from.id}, function (err, user) {
         if(err){
           return console.log(err);
-        }
-        if(user.name == 'Dani'){
+        } 
+          if(user.subscription){
           telegram.sendMessage(message.chat.id, "You are subscribed");
-        } else {
+          } else {
           telegram.sendMessage(message.chat.id, "You are not subscribed");
-        }
+          }
+
       });
     }
 });
