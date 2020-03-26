@@ -27,8 +27,9 @@ async function updateSubscriptionTrue(message){
 
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
-        telegram.sendMessage(message.chat.id, getCurrentDolar());
-    }
+      const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
+       telegram.sendMessage(message.chat.id, getCurrentDolar());
+   }
 });
 
 telegram.on(subscribe, (message) => {
@@ -46,9 +47,6 @@ telegram.on(subscribe, (message) => {
     }
 });
 
-
-
-
 telegram.on(unsubscribe, (message) => {
     if (unsubscribe){
       updateSubscriptionFalse(message);
@@ -57,15 +55,19 @@ telegram.on(unsubscribe, (message) => {
 
 telegram.on(subscription_status, (message) => {
     if (subscription_status){
-      const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
-      const user = User.find({ id: message.from.id }, callback);
 
-      if(user.subscription == true){
-        telegram.sendMessage(message.chat.id, "You are subscribed");
-      } else {
-        telegram.sendMessage(message.chat.id, "You are not subscribed");
-      }
+      User.find({id: message.from.id}, function (err, user) {
+        if(err){
+          return console.log(err);
+        }
+        if(user.name == 'Dani'){
+          telegram.sendMessage(message.chat.id, "You are subscribed");
+        } else {
+          telegram.sendMessage(message.chat.id, "You are not subscribed");
+        }
+      });
     }
 });
+
 
 telegram.start();

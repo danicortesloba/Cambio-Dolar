@@ -4,5 +4,7 @@ User.deleteMany({ id: message.from.id}, callback)
 
 
 
+     users = User.find({ id: message.from.id }, callback);
+
 
 }
