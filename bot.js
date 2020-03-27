@@ -4,12 +4,28 @@ const User = require("./data/db/db");
 const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
 const fetch = require('node-fetch');
+const cron = require('node-cron');
 
 const get_dolar = /\/get_dolar/;
 const subscribe = /\/subscribe/;
 const unsubscribe = /\/unsubscribe/;
 const subscription_status = /\/subscription_status/;
 
+cron.schedule('0 10 * * *', () => {
+  User.find({subscription: true}, function (err, subscribers) {
+      if(err){
+        return console.log(err);
+      } else {
+        subscribers.forEach(function (subscriber, index) {
+          telegram.sendMessage(subscriber.id, getCurrentDolar());
+});
+      }
+  });
+
+}, {
+  scheduled: true,
+  timezone: "America/Sao_Paulo"
+});
 
 async function updateSubscriptionFalse(message){
   const filter = { id: message.from.id };

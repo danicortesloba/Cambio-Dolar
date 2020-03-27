@@ -14,6 +14,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "mongoose": "^5.9.5",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
     "telebot": "^1.3.0"
   }
