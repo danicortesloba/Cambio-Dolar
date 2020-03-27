@@ -24,3 +24,8 @@ y el status me dice si estoy subscrito o no
 el subscribe es solo para usuarios por ahora
 así que tienes que validar eso
 si lo escribo desde un grupo no se podría
+
+5) implementa esto https://www.npmjs.com/package/node-cron
+tienes que hacer un cron que corra todos los días a las 10am
+y que le mande el valor del dolar
+a todos los usuarios suscritos
