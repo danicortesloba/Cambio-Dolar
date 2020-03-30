@@ -29,3 +29,8 @@ si lo escribo desde un grupo no se podría
 tienes que hacer un cron que corra todos los días a las 10am
 y que le mande el valor del dolar
 a todos los usuarios suscritos
+
+6) tienes que hacerle una api al bot usando esto https://expressjs.com/es/starter/hello-world.html
+Ejemplo "Hello World" de Express
+[Photo]
+tienes que hacer un endpoint que retorne 2 arreglos de personas suscritas y no suscritas∫
