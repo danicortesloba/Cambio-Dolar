@@ -18,8 +18,8 @@ let unsubscribers;
 
 
 
-app.get('/', function (req, res) {
-  User.find({subscription: true}, function (err, people) {
+app.get('/', async function (req, res) {
+let esto = await User.find({subscription: true}, function (err, people) {
     if(err){
       return console.log(err);
     } else {
