@@ -5,11 +5,28 @@ const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
 const fetch = require('node-fetch');
 const cron = require('node-cron');
+const express = require('express')
+const app = express()
+const port = 3000
 
 const get_dolar = /\/get_dolar/;
 const subscribe = /\/subscribe/;
 const unsubscribe = /\/unsubscribe/;
 const subscription_status = /\/subscription_status/;
+
+
+app.get('/', function (req, res) {
+  User.find({subscription: true}, function (err, subscribers) {
+    if(err){
+      return console.log(err);
+    } else {
+      res.send("Subscribers: " + subscribers)
+    }
+
+  });
+})
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 cron.schedule('0 10 * * *', () => {
   User.find({subscription: true}, function (err, subscribers) {

@@ -13,6 +13,7 @@
   "author": "Chana",
   "license": "UNLICENSED",
   "dependencies": {
+    "express": "^4.17.1",
     "mongoose": "^5.9.5",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
