@@ -13,17 +13,21 @@ const get_dolar = /\/get_dolar/;
 const subscribe = /\/subscribe/;
 const unsubscribe = /\/unsubscribe/;
 const subscription_status = /\/subscription_status/;
+let subscribers;
+let unsubscribers;
+
 
 
 app.get('/', function (req, res) {
-  User.find({subscription: true}, function (err, subscribers) {
+  User.find({subscription: true}, function (err, people) {
     if(err){
       return console.log(err);
     } else {
-      res.send("Subscribers: " + subscribers)
+      subscribers = people;
     }
-
   });
+  console.log({subscribers})
+  res.send("Subscribers: " + subscribers)
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
