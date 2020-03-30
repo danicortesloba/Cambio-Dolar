@@ -19,15 +19,21 @@ let unsubscribers;
 
 
 app.get('/', async function (req, res) {
-let esto = await User.find({subscription: true}, function (err, people) {
+let findSubscribers = await User.find({subscription: true}, function (err, people) {
     if(err){
       return console.log(err);
     } else {
       subscribers = people;
     }
   });
-  console.log({subscribers})
-  res.send("Subscribers: " + subscribers)
+  let findUnsubscribers = await User.find({subscription: false}, function (err, people) {
+      if(err){
+        return console.log(err);
+      } else {
+        unsubscribers = people;
+      }
+    });
+  res.send("Subscribers: " + subscribers + "\n" + "Unsubscribers: " + unsubscribers)
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
