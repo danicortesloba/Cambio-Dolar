@@ -2,6 +2,10 @@ const { token } = require('./config');
 const { port } = require('./config');
 const { timezone } = require('./config');
 const { getCurrentDolar } = require('./exchange');
+const {get_dolar} = require('./commands');
+const {subscribe} = require('./commands');
+const {unsubscribe} = require('./commands');
+const {subscription_status} = require('./commands');
 const User = require("./data/db/db");
 const TeleBot = require('telebot');
 const telegram = new TeleBot(token)
@@ -11,10 +15,7 @@ const express = require('express')
 const app = express()
 
 
-const get_dolar = /\/get_dolar/;
-const subscribe = /\/subscribe/;
-const unsubscribe = /\/unsubscribe/;
-const subscription_status = /\/subscription_status/;
+
 let subscribers;
 let unsubscribers;
 
