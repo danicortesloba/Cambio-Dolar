@@ -33,4 +33,10 @@ a todos los usuarios suscritos
 6) tienes que hacerle una api al bot usando esto https://expressjs.com/es/starter/hello-world.html
 Ejemplo "Hello World" de Express
 [Photo]
-tienes que hacer un endpoint que retorne 2 arreglos de personas suscritas y no suscritas∫
+tienes que hacer un endpoint que retorne 2 arreglos de personas suscritas y no suscritas
+
+7) - cambia res.send por res.json y responde como json
+- los comandos dejalos en un archivo de comandos
+- el timezone del cron y el puerto de express en el archivo de config
+y
+tienes que hacer un middleware de express, para que solo se puedan hacer requests si en el header de la request hay un atributo llamado chano que tenga el valor true
