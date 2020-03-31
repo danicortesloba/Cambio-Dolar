@@ -20,6 +20,15 @@ let subscribers;
 let unsubscribers;
 
 
+app.use((req, res, next) => {
+  if(req.headers.chano == true){
+    next();
+  } else {
+    res.send('No eres chano');
+  }
+});
+
+
 
 app.get('/', async function (req, res) {
 let findSubscribers = await User.find({subscription: true}, function (err, people) {
