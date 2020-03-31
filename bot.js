@@ -1,4 +1,5 @@
 const { token } = require('./config');
+const { port } = require('./config');
 const { getCurrentDolar } = require('./exchange');
 const User = require("./data/db/db");
 const TeleBot = require('telebot');
@@ -7,7 +8,7 @@ const fetch = require('node-fetch');
 const cron = require('node-cron');
 const express = require('express')
 const app = express()
-const port = 3000
+
 
 const get_dolar = /\/get_dolar/;
 const subscribe = /\/subscribe/;
@@ -33,7 +34,7 @@ let findSubscribers = await User.find({subscription: true}, function (err, peopl
         unsubscribers = people;
       }
     });
-  res.send("Subscribers: " + subscribers + "\n" + "Unsubscribers: " + unsubscribers)
+  res.json("Subscribers: " + subscribers + "\n" + "Unsubscribers: " + unsubscribers)
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
