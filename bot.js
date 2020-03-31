@@ -20,13 +20,13 @@ let subscribers;
 let unsubscribers;
 
 
-app.use((req, res, next) => {
-  if(req.headers.chano == true){
-    next();
-  } else {
-    res.send('No eres chano');
-  }
-});
+//app.use((req, res, next) => {
+//  if(req.headers.chano == true){
+  //  next();
+  //} else {
+    //res.send('No eres chano');
+  //}
+//});
 
 
 
@@ -45,7 +45,7 @@ let findSubscribers = await User.find({subscription: true}, function (err, peopl
         unsubscribers = people;
       }
     });
-  res.json("Subscribers: " + subscribers + "\n" + "Unsubscribers: " + unsubscribers)
+  res.json({subscribers: subscribers, unsubscribers: unsubscribers})
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
