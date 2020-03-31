@@ -1,5 +1,6 @@
 const { token } = require('./config');
 const { port } = require('./config');
+const { timezone } = require('./config');
 const { getCurrentDolar } = require('./exchange');
 const User = require("./data/db/db");
 const TeleBot = require('telebot');
@@ -52,7 +53,7 @@ cron.schedule('0 10 * * *', () => {
 
 }, {
   scheduled: true,
-  timezone: "America/Sao_Paulo"
+  timezone: timezone
 });
 
 async function updateSubscriptionFalse(message){
