@@ -19,14 +19,13 @@ const app = express()
 let subscribers;
 let unsubscribers;
 
-
-//app.use((req, res, next) => {
-//  if(req.headers.chano == true){
-  //  next();
-  //} else {
-    //res.send('No eres chano');
-  //}
-//});
+app.use((req, res, next) => {
+  if(req.headers.chano){
+    next();
+  } else {
+    res.send('No eres chano');
+  }
+});
 
 
 
