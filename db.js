@@ -1,10 +1,5 @@
-require('dotenv').config();
-const db = require('./index');
+const mongoose = require('mongoose')
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-
-});
 
 const userSchema = new mongoose.Schema({
   id: Number,
