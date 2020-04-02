@@ -1,5 +1,4 @@
-const { token } = require('./config');
-const { timezone } = require('./config');
+require('dotenv').config();
 const { getCurrentDolar } = require('./exchange');
 const {get_dolar} = require('./commands');
 const {subscribe} = require('./commands');
@@ -7,7 +6,7 @@ const {unsubscribe} = require('./commands');
 const {subscription_status} = require('./commands');
 const User = require("./data/db/db");
 const TeleBot = require('telebot');
-const telegram = new TeleBot(token);
+const telegram = new TeleBot(process.env.TOKEN);
 
 const fetch = require('node-fetch');
 const cron = require('node-cron');
@@ -26,7 +25,7 @@ cron.schedule('0 10 * * *', () => {
 
 }, {
   scheduled: true,
-  timezone: timezone
+  timezone: process.env.TIMEZONE
 });
 
 async function updateSubscriptionFalse(message){

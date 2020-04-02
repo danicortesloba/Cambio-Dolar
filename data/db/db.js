@@ -1,6 +1,7 @@
+require('dotenv').config();
 const { conection_string } = require("../../config");
 const mongoose = require('mongoose');
-mongoose.connect(conection_string, {useNewUrlParser: true});
+mongoose.connect(process.env.CONECTION_STRING, {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

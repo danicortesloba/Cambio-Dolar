@@ -1,7 +1,6 @@
 const User = require("./data/db/db");
 const express = require('express')
 const app = express()
-//const { port } = require('./config');
 require('dotenv').config();
 
 
