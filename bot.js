@@ -9,7 +9,6 @@ const TeleBot = require('telebot');
 const telegram = new TeleBot(process.env.TOKEN);
 const fetch = require('node-fetch');
 
-
 async function updateSubscriptionFalse(message){
   const filter = { id: message.from.id };
   const update = { subscription: false };
@@ -31,6 +30,12 @@ function giveSubscriptionStatus(user, message){
   }
 }
 
+function saveUser(message){
+  let user = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
+  user.save();
+  telegram.sendMessage(message.chat.id, "You are subscribed!");
+}
+
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
@@ -44,9 +49,7 @@ telegram.on(subscribe, (message) => {
           if(count>0){
             updateSubscriptionTrue(message);
           } else {
-            let user = new User({id: message.from.id, is_bot: message.from.is_bot, first_name: message.from.first_name, language_code: message.from.language_code, subscription: true})
-            user.save();
-            telegram.sendMessage(message.chat.id, "You are subscribed!");
+            saveUser(message);
           }
       });
     }
@@ -70,8 +73,5 @@ telegram.on(subscription_status, (message) => {
       });
     }
 });
-
-
-
 
 module.exports = telegram;
