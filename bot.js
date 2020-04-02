@@ -1,5 +1,4 @@
 const { token } = require('./config');
-const { port } = require('./config');
 const { timezone } = require('./config');
 const { getCurrentDolar } = require('./exchange');
 const {get_dolar} = require('./commands');
@@ -8,46 +7,11 @@ const {unsubscribe} = require('./commands');
 const {subscription_status} = require('./commands');
 const User = require("./data/db/db");
 const TeleBot = require('telebot');
-const telegram = new TeleBot(token)
+const telegram = new TeleBot(token);
+
 const fetch = require('node-fetch');
 const cron = require('node-cron');
-const express = require('express')
-const app = express()
 
-
-
-let subscribers;
-let unsubscribers;
-
-app.use((req, res, next) => {
-  if(req.headers.chano){
-    next();
-  } else {
-    res.send('No eres chano');
-  }
-});
-
-
-
-app.get('/', async function (req, res) {
-let findSubscribers = await User.find({subscription: true}, function (err, people) {
-    if(err){
-      return console.log(err);
-    } else {
-      subscribers = people;
-    }
-  });
-  let findUnsubscribers = await User.find({subscription: false}, function (err, people) {
-      if(err){
-        return console.log(err);
-      } else {
-        unsubscribers = people;
-      }
-    });
-  res.json({subscribers: subscribers, unsubscribers: unsubscribers})
-})
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 cron.schedule('0 10 * * *', () => {
   User.find({subscription: true}, function (err, subscribers) {
@@ -126,4 +90,7 @@ telegram.on(subscription_status, (message) => {
     }
 });
 
-telegram.start();
+
+  
+
+module.exports = telegram;
