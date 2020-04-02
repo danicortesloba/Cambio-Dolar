@@ -1,11 +1,18 @@
 require('dotenv').config()
 const telegram = require('./bot');
 const app = require('./api');
-require('dotenv').config()
+const task = require('./cron')
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.CONECTION_STRING, {useNewUrlParser: true});
+const db = mongoose.connection;
+
 
 
 telegram.start();
 
-app.use((req, res, next) => {
-  next();
-});
+task.start();
+
+app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}!`))
+
+modules.exports = db;

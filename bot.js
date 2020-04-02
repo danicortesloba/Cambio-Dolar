@@ -4,29 +4,11 @@ const {get_dolar} = require('./commands');
 const {subscribe} = require('./commands');
 const {unsubscribe} = require('./commands');
 const {subscription_status} = require('./commands');
-const User = require("./data/db/db");
+const User = require("./db");
 const TeleBot = require('telebot');
 const telegram = new TeleBot(process.env.TOKEN);
-
 const fetch = require('node-fetch');
-const cron = require('node-cron');
 
-
-cron.schedule('0 10 * * *', () => {
-  User.find({subscription: true}, function (err, subscribers) {
-      if(err){
-        return console.log(err);
-      } else {
-        subscribers.forEach(function (subscriber, index) {
-          telegram.sendMessage(subscriber.id, getCurrentDolar());
-});
-      }
-  });
-
-}, {
-  scheduled: true,
-  timezone: process.env.TIMEZONE
-});
 
 async function updateSubscriptionFalse(message){
   const filter = { id: message.from.id };

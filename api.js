@@ -1,4 +1,4 @@
-const User = require("./data/db/db");
+const User = require("./db");
 const express = require('express')
 const app = express()
 require('dotenv').config();
@@ -38,6 +38,5 @@ let findSubscribers = await User.find({subscription: true}, function (err, peopl
   res.json({subscribers: subscribers, unsubscribers: unsubscribers})
 })
 
-app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}!`))
 
 module.exports = app;
