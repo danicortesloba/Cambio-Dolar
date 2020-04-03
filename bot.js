@@ -66,7 +66,7 @@ telegram.on(subscription_status, (message) => {
     if (subscription_status){
       User.exists({ id: message.from.id }, function(err, result) {
      if (err) {
-       res.send(err);
+       return console.log("User doesn't exist");
      } else {
        User.findOne({id: message.from.id}, function (err, user) {
            if(err){
