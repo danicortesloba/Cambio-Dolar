@@ -64,13 +64,20 @@ telegram.on(unsubscribe, (message) => {
 
 telegram.on(subscription_status, (message) => {
     if (subscription_status){
-      User.findOne({id: message.from.id}, function (err, user) {
-          if(err){
-            return console.log(err);
-          } else {
-            giveSubscriptionStatus(user, message);
-          }
-      });
+      User.exists({ id: message.from.id }, function(err, result) {
+     if (err) {
+       res.send(err);
+     } else {
+       User.findOne({id: message.from.id}, function (err, user) {
+           if(err){
+             return console.log(err);
+           } else {
+             giveSubscriptionStatus(user, message);
+           }
+       });
+     }
+   });
+
     }
 });
 
