@@ -39,7 +39,7 @@ function saveUser(message){
 telegram.on(get_dolar, (message) => {
     if (get_dolar) {
       const callback = (err, res) => console.log("Error: ", err, "Result: ", res)
-      telegram.sendMessage(message.chat.id, getCurrentDolar());
+      telegram.sendMessage(message.chat.id, `El precio del dólar es ${getCurrentDolar()}`);
     }
 });
 
