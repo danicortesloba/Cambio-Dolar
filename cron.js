@@ -13,7 +13,7 @@ var task = cron.schedule('00 10 * * *', () => {
         return console.log(err);
       } else {
         subscribers.forEach(function (subscriber, index) {
-          telegram.sendMessage(subscriber.id, getCurrentDolar());
+          telegram.sendMessage(subscriber.id, `¡Buen día! El precio del dólar es: ${getCurrentDolar()}`);
         });
       }
   });
