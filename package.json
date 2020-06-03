@@ -8,6 +8,12 @@
     "start": "node src/index.js",
     "commit": "commit"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+
   "engines": {
     "node": "12.15.0"
   },
